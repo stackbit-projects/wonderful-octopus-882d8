@@ -1,0 +1,23 @@
+$font-base: 'Roboto' , Helvetica , apple-system, arial, sans-serif;
+$primary: #fc397c;
+$secondary: darken(#444, 15%);
+$grey: #383838;
+$black: #181215;
+$darkGray: #3c4856;
+$lightGray: #3c4856bd;
+$white: #fff;
+$purple: #f94062;
+$violet: #2e0276;
+$dark: #121616;
+$orange: #fc9b1f;
+$turquoise: #02ddd5;
+
+@import "imports/font-awesome/font-awesome";
+@import "imports/layout";
+@import "imports/general";
+@import "imports/main";
+@import "imports/header";
+@import "imports/footer";
+@import "imports/blog";
+@import "imports/buttons";
+@import "imports/banner";

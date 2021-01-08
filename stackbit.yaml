@@ -1,0 +1,262 @@
+stackbitVersion: ~0.2.39
+uploadDir: images
+metadata:
+  title: Bejamas Demo
+  description: Demo template for content managment services
+  author: Bejamas
+  authorURL: 'https://www.bejamas.io'
+  images:
+    small: images/logo-1.png
+    large: images/logo-large.png
+models:
+  config:
+    type: config
+    label: Global Site Config
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Site title
+        required: true
+      - type: object
+        name: header
+        label: Header Configuration
+        fields:
+          - type: image
+            name: logo_img
+            label: Logo
+            description: The logo image displayed on the left side.
+      - type: object
+        name: footer
+        label: Footer Configuration
+        fields:
+          - type: string
+            name: content
+            label: Footer Content
+            description: The copyright text displayed in the footer.
+          - type: image
+            name: logo_img
+            label: Logo
+            description: The logo image displayed on the left side.
+          - type: list
+            name: socials
+            label: Socials
+            description: A list of social links displayed in the footer.
+            items:
+              type: object
+              fields:
+                - type: enum
+                  name: element
+                  label: Type of social
+                  required: true
+                  options:
+                    - label: Facebook
+                      value: facebook
+                    - label: Twitter
+                      value: twitter
+                    - label: LinkedIn
+                      value: linkedin
+                    - label: Github
+                      value: github
+                - type: string
+                  name: url
+                  label: URL
+                  widget: url
+  page:
+    type: page
+    label: Page
+    singleInstance: false
+    hideContent: false
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: string
+        name: heading
+        label: Heading
+        description: The text shown just below the page title.
+      - type: page_menus
+        name: menus
+        label: Page Menus
+        description: Which menus should this page show up in
+    layout: page
+  social:
+    type: data
+    file: socials.json
+    label: Social Links
+    fields:
+      - type: list
+        name: links
+        label: Social Links
+        description: A list of social links displayed on the left side.
+        items:
+          type: object
+          labelField: title
+          fields:
+            - type: string
+              name: type
+              label: Type
+              hidden: true
+            - type: string
+              name: title
+              label: Title
+            - type: string
+              name: icon
+              label: Icon
+              description: Font Awesome icon class name.
+              required: true
+            - type: string
+              name: url
+              label: URL
+              widget: url
+  post:
+    type: page
+    label: Post
+    folder: posts
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: string
+        name: excerpt
+        label: Description
+        description: The text shown just below the post title on thumbnail.
+      - type: image
+        name: image_thumbnail
+        label: Thumbnail Image
+        description: The image shown in the feature.
+      - type: object
+        name: button_link
+        label: Button Link
+        description: The button link
+        fields:
+          - type: string
+            name: name
+            label: Name
+            required: true
+          - type: string
+            name: url
+            label: Link url
+            required: true
+          - type: string
+            name: title
+            label: Link title
+            required: true
+      - type: page_menus
+        name: menus
+        label: Post Menus
+        description: Which menus should this page show up in
+    layout: post
+  blog:
+    type: page
+    label: Blog
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the page.
+        required: true
+      - type: page_menus
+        name: menus
+        label: Blog Menus
+        description: Which menus should this page show up in
+    layout: blog
+  site_menus:
+    type: data
+    file: menus.json
+    label: Site Menus
+    labelField: null
+    description: >-
+      Site menus model, defines list of menus that can be specified from within
+      site configuration
+    fields:
+      - type: list
+        name: main
+        label: Main menu
+        description: List of items for Main menu
+        items:
+          type: site_menu_item
+      - type: list
+        name: secondary
+        label: Secondary menu
+        description: List of items for Secondary menu
+        items:
+          type: site_menu_item
+  site_menu_item:
+    type: object
+    label: Site Menu Item
+    labelField: title
+    description: 'Site menu item model, defines fields for a single site menu item'
+    fields:
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item
+        required: true
+      - type: string
+        name: title
+        label: Title
+        description: The title of the menu item
+        required: true
+      - type: string
+        name: url
+        label: URL
+        description: The URL the menu item links to
+        required: true
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+  page_menus:
+    type: object
+    label: Page Menus
+    labelField: null
+    description: 'Page menus model, defines menus that can be specified from within pages'
+    fields:
+      - type: page_menu_item
+        name: main
+        label: Main menu item
+        description: Main menu item for this page
+      - type: page_menu_item
+        name: secondary
+        label: Secondary menu item
+        description: Secondary menu item for this page
+  page_menu_item:
+    type: object
+    label: Page Menu Item
+    labelField: title
+    description: 'Page menu item model, defines fields for a single page menu item'
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the menu item
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item
+ssgName: gatsby
+publishDir: public
+buildCommand: ./ssg-build.sh
+injectLocations:
+  htmlHead:
+    file: src/components/Layout.js
+    tagName: Helmet
+  htmlBody:
+    file: gatsby-ssr.js
+    tokens:
+      - '\{\/\* put additional scripts here \*\/\}'
+    tokenIndex: 0
+    location: replace

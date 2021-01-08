@@ -1,0 +1,127 @@
+.footer {
+  background: $dark;
+  color: $white;
+  padding: 20px;
+
+  .footer-inner {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @media only screen and (min-width: 576px) {
+      align-items: flex-start;
+    }
+
+    .footer-logo {
+      width: 50%;
+      max-width: 100px;
+
+      @media only screen and (min-width: 768px) {
+        width: 50%;
+        max-width: 70px;
+      }
+    }
+
+    .footer-menu {
+      width: 100%;
+      margin: 60px 0;
+
+      @media only screen and (min-width: 576px) {
+        width: 50%;
+        margin: 0;
+      }
+
+      @media only screen and (min-width: 768px) {
+        width: 20%
+      }
+
+      ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @media only screen and (min-width: 576px) {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
+        @media only screen and (min-width: 768px) {
+          align-items: flex-start;
+        }
+
+        li {
+          & + li {
+            margin-left: 30px;
+
+            @media only screen and (min-width: 576px) {
+              margin-left: 0;
+              margin-top: 20px;
+            }
+          }
+          
+          a {
+            color: inherit;
+
+            &:hover {
+              color: $purple;
+              transition: .3s ease;
+            }
+          }
+
+        }
+      }
+    }
+
+    .footer-socials {
+      width: 100%;
+      margin-bottom: 60px;
+
+      @media only screen and (min-width: 576px) {
+        margin-top: 60px;
+      }
+
+      @media only screen and (min-width: 768px) {
+        width: 40%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        line-height: 30px;
+        text-align: center;
+        background-color: $purple;
+        color: $white;
+        transition: .3s ease;
+
+        & + a {
+          margin-left: 20px;
+        }
+
+        &:hover {
+          color: $purple;
+          background-color: $white;
+        }
+      }
+    }
+
+    .footer-copy {
+      width: 100%;
+
+      @media only screen and (min-width: 768px) {
+        margin-top: 160px;
+        text-align: center;
+      }
+    }
+  }
+}
+
